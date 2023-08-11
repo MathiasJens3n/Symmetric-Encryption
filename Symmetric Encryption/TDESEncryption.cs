@@ -11,13 +11,28 @@ namespace Symmetric_Encryption
     internal class TDESEncryption : IEncrypter
     {
         /// <summary>
+        /// Generates a Triple DES Key
+        /// </summary>
+        /// <returns>Triple DES key as byte array</returns>
+        public byte[] GenerateKey()
+        {
+            using (TripleDES tDES = TripleDES.Create()) { return tDES.Key; }
+        }
+        /// <summary>
+        /// Generates a Triple DES Vector
+        /// </summary>
+        /// <returns>Triple DES vector as byte array</returns>
+        public byte[] GenerateIV()
+        {
+            using (TripleDES tDES = TripleDES.Create()) { return tDES.IV; }
+        }
+        /// <summary>
         /// Encrypts message with TripleDES
         /// </summary>
         /// <param name="encryptMessage">Message to be encrypted</param>
         /// <param name="key">Encryption key</param>
         /// <param name="iv">Vector</param>
         /// <returns>Encrypted message as a byte array</returns>
-
         public byte[] Encrypt(byte[] encryptMessage, byte[] key, byte[] iv)
         {
             //Encrypts data in memory using MemoryStream
@@ -45,7 +60,6 @@ namespace Symmetric_Encryption
         /// <param name="key">Encryption key</param>
         /// <param name="iv">Vector</param>
         /// <returns>Encrypted message as a byte array</returns>
-
         public byte[] Decrypt(byte[] decryptMessage, byte[] key, byte[] iv)
         {
             //Decrypts data in memory using MemoryStream
@@ -79,7 +93,5 @@ namespace Symmetric_Encryption
                 throw;
             }
         }
-
-
     }
 }

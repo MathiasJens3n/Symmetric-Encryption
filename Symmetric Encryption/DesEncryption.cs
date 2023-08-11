@@ -12,6 +12,22 @@ namespace Symmetric_Encryption
     internal class DesEncryption : IEncrypter
     {
         /// <summary>
+        /// Generates a DES Key
+        /// </summary>
+        /// <returns>DES key as byte array</returns>
+        public byte[] GenerateKey()
+        {
+            using (DES DES = DES.Create()) { return DES.Key; }
+        }
+        /// <summary>
+        /// Generates a DES vector
+        /// </summary>
+        /// <returns>DES vector as byte array</returns>
+        public byte[] GenerateIV()
+        {
+            using (DES DES = DES.Create()) { return DES.IV; }
+        }
+        /// <summary>
         /// Encrypts message with DES
         /// </summary>
         /// <param name="encryptMessage">Message to be encrypted</param>
@@ -57,10 +73,6 @@ namespace Symmetric_Encryption
             //Decrypts data in memory using MemoryStream
             try
             {
-                Debug.WriteLine(Convert.ToBase64String(key));
-                Debug.WriteLine(Convert.ToBase64String(iv));
-                Debug.WriteLine(Convert.ToBase64String(decryptMessage));
-
                 byte[] decrypted = new byte[decryptMessage.Length];
                 int offset = 0;
 
@@ -83,8 +95,6 @@ namespace Symmetric_Encryption
                         }
                     }
                 }
-                Debug.WriteLine(Encoding.UTF8.GetString(decrypted, 0, offset) + "kæft noget lort");
-
                 return decrypted;
             }
             catch (CryptographicException e)
@@ -93,6 +103,5 @@ namespace Symmetric_Encryption
                 throw;
             }
         }
-
     }
 }

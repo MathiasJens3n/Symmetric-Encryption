@@ -10,5 +10,7 @@ namespace Symmetric_Encryption
     {
         public byte[] Encrypt(byte[] encryptMessage, byte[] key, byte[] iv);
         public byte[] Decrypt(byte[] decryptMessage, byte[] key, byte[] iv);
+        public byte[] GenerateKey();
+        public byte[] GenerateIV();
     }
 }
